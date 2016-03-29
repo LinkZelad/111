@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	for(int jj=0;jj<t;jj++){
+	int n;
+	int in[1000];
+	int out[1000];
+	int a[1000];
+	cin>>n;
+	for(int j=0;j<n;j++)
+	{
+		cin>>in[j];
+	}
+	int z=0;
+	int m=0;
+    for (int j=0;j<n;j++){
+        if (j==0){
+            out[j]=1;
+            z++;
+            a[0]=0;
+        }else {
+            a[j]=in[j]-in[j-1];
+            m=m+in[j]-in[j-1];
+            if(in[j]!=in[j-1]){
+                out[j]=1;
+                m=m-1;
+                a[j]=a[j]-1;
+                z++;
+            }else if(in[j]==in[j-1]&&m>0){
+                if(a[j-1]!=0){
+                out[j]=out[j-1]+1;
+                m=m-1;
+                z++;
+                a[j-1]=a[j-1]-1;
+                }else {
+                    out[j]=1;
+                    for (int i=j;i>0;i--){
+                            if(a[i]==0){
+                                out[j]+=1;
+                            }else {
+                            a[i]-=1;
+                            break;
+                            }
+                    }
+
+                }
+            }
+            else if(in[j]==in[j-1]&&m==0){
+                out[j]=z+1;
+                z++;
+            }
+        }
+    }
+
+	for(int j=0;j<n;j++)
+	{
+		cout<<out[j]<<' ';
+	}
+	cout<<endl;
+
+	}
+}
