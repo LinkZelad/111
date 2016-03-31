@@ -1,0 +1,45 @@
+//poj1061//
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int exgcd(int aa,int bb,int *x,int *y);
+
+int main(){
+    int x,y,m,n,l;
+    cin>>x>>y>>m>>n>>l;
+    int a,b,c;
+    a=m-n;
+    b=x-y;
+    int d;
+    int xx,yy;
+    d=exgcd(a,l,&xx,&yy);
+    if(d<0){
+        d=-d;
+    }
+    if (b%d!=0){
+        cout << "Impossible" << endl;
+    }else{
+        xx=xx*(b/d);
+        int temp=l/d;
+        xx=(xx%temp+temp)%temp;
+        cout << xx<<endl;
+    }
+    return 0;
+}
+
+int exgcd(int aa,int bb,int *x,int *y){
+    if(bb==0){
+        *x=1;
+        *y=0;
+        return aa;
+    }else{
+        int r=exgcd(bb,aa%bb,x,y);
+        int t=*x;
+        *x=*y;
+        *y=t-(aa/bb;)**y;
+        return r;
+    }
+}
